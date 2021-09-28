@@ -150,7 +150,7 @@ client.on("messageCreate", async (message) => {
                 })
             } else {
                 message.reply({
-                    content: "I don't know this person yet, let just let them go for today"
+                    content: "I don't know this person yet, I'll let that pass this time"
                 })
                 // let them go on the first yer mum joke, if they didn't make one themself already.
                 price_pool.set(user_, 0);
