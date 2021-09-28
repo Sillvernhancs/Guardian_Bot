@@ -9,6 +9,8 @@ dotenv.config()
 const fs = require('fs');
 const readline = require('readline');
 var price_pool = new Map();
+let OP = ["IamSilver"];
+
 const client = new DiscordJS.Client({
     intents: [
         Intents.FLAGS.GUILDS,
@@ -84,6 +86,18 @@ client.on("ready", () => {
         var data = line.split(" ");
         price_pool.set(data[0], parseInt(data[1], 10));
     });
+
+    console.log("syncing OP list...")
+    //-----------------------// read file for DEV LIST
+    const data_2 = fs.readFileSync('OP_list.txt', 'UTF-8');
+    // split the contents by new line
+    var lines = data_2.split("\n");
+    // put in all the data
+    console.log("OP LIST:")
+    lines.forEach((line : any) => {
+        OP.push(line.replace("\r",''));
+    });
+    console.log(OP)
     //------------------------// set the bot's status
     client.user?.setActivity('You', { type: 'WATCHING' });
     console.log("the bot is ready!")
@@ -124,8 +138,29 @@ client.on("messageCreate", async (message) => {
         process.exit(0);
     }
 
-    //----------------------------------// listening to your mom
-
+    //----------------------------------// dev mode increase debt
+    if((message.content.includes("$1 to") || message.content.includes("1$ to")) && message.author.username != "The guardian") {
+        //---> if an OP let them, if not be sassy.
+        if(OP.includes(message.author.username)) {
+            var user_ = message.content.substr(5);
+            if(price_pool.has(user_)) {
+                price_pool.set(user_, price_pool.get(user_) + 1);
+                message.reply({
+                    content: "$1 to " + user_
+                })
+            } else {
+                message.reply({
+                    content: "I don't know this person yet, let just let them go for today"
+                })
+                // let them go on the first yer mum joke, if they didn't make one themself already.
+                price_pool.set(user_, 0);
+            }
+        } else {
+            message.reply({
+                content: "you can't tell me what to do"
+            })
+        }
+    }
 })
 
 client.login(process.env.TOKEN)
