@@ -19,15 +19,6 @@ const client = new DiscordJS.Client({
 })
 //------------------------------------------------------------------------------------------
 // translate function
-// Turn bot off (destroy), then turn it back on
-function resetBot(channel : any) {
-    // send channel a message that you're resetting bot [optional]
-    channel.send('Brb, don\'t you dare say something before I\'m back')
-    .then((msg : any)=> client.destroy())
-    .then(() => client.login(process.env.TOKEN));
-}
-//------------------------------------------------------------------------------------------
-// translate function
 function toEng(s : any, message : any) {
     return new Promise(resolve => {
         translate(s, { to: 'en' }).then((trasnlated_ : any) => {
@@ -80,6 +71,7 @@ function toFine(s : any, message : any) {
 //------------------------------------------------------------------------------------------
 // boot up sequence
 client.on("ready", () => {
+    console.log("\\------------------------------------------")
     console.log("reading save files...")
     //-----------------------// read file
     const data = fs.readFileSync('pool.txt', 'UTF-8');
@@ -92,7 +84,7 @@ client.on("ready", () => {
         var data = line.split(" ");
         price_pool.set(data[0], parseInt(data[1], 10));
     });
-
+    console.log("\\------------------------------------------")
     console.log("syncing OP list...")
     //-----------------------// read file for DEV LIST
     const data_2 = fs.readFileSync('OP_list.txt', 'UTF-8');
@@ -140,7 +132,7 @@ client.on("messageCreate", async (message) => {
         })
     }
     //----------------------------------// restart the bot with new code.
-    if(message.content === "!reset") {
+    if(message.content === "!exit") {
         process.exit(0);
     }
 
