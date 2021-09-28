@@ -40,6 +40,21 @@ function toEng(s : any, message : any) {
     })
 }
 //------------------------------------------------------------------------------------------
+// save Map to Pool.txt
+function save() {
+    // save to the file pool.txt
+    var line = "";
+    for (var entry of price_pool.entries()) {
+        line += entry[0] + " " + entry[1] + " \n";
+    }
+    // console.log(line);
+    fs.writeFile('pool.txt', line, (err : any) => {
+        if (err) {
+            console.error(err)
+            return
+    }})
+}
+//------------------------------------------------------------------------------------------
 // "fine function"
 function toFine(s : any, message : any) {
     // regex made it slow but it's shorter and easier to read so...
@@ -58,17 +73,8 @@ function toFine(s : any, message : any) {
             // create new user in the pool
             price_pool.set(nameNoSpace, 1);
         }
-        // save to the file pool.txt
-        var line = "";
-        for (var entry of price_pool.entries()) {
-            line += entry[0] + " " + entry[1] + " \n";
-        }
-        // console.log(line);
-        fs.writeFile('pool.txt', line, (err : any) => {
-            if (err) {
-                console.error(err)
-                return
-        }})
+        // save it to the pool.txt
+        save();
     }
 }
 //------------------------------------------------------------------------------------------
@@ -142,7 +148,8 @@ client.on("messageCreate", async (message) => {
     if((message.content.includes("$1 to") || message.content.includes("1$ to")) && message.author.username != "The guardian") {
         //---> if an OP let them, if not be sassy.
         if(OP.includes(message.author.username)) {
-            var user_ = message.content.substr(5);
+            var user_ = message.content.substr(6);
+            console.log(user_ + " was given $1")
             if(price_pool.has(user_)) {
                 price_pool.set(user_, price_pool.get(user_) + 1);
                 message.reply({
@@ -155,6 +162,7 @@ client.on("messageCreate", async (message) => {
                 // let them go on the first yer mum joke, if they didn't make one themself already.
                 price_pool.set(user_, 0);
             }
+            save()
         } else {
             message.reply({
                 content: "you can't tell me what to do"
