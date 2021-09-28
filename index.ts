@@ -42,7 +42,7 @@ function toEng(s : any, message : any) {
 function toFine(s : any, message : any) {
     // regex made it slow but it's shorter and easier to read so...
     const regex_mom = /muu*m|moo*m|maa*mm*a*|maa*dd*aa*|m00*m|moo*ther|muu*ther|m00*ther/s;
-    const regex_your = /yoo*uu*r|uu*r|yee*3*r|y00*uu*r|thyy*|thoo*uu*/s;
+    const regex_your = /yoo*uu*r|uu*r|yee*3*r|y00*uu*r|thyy*|thoo*uu*|yuu*h/s;
     if(regex_mom.test(s) && regex_your.test(s)) {
         message.reply({
             content: "$1"
