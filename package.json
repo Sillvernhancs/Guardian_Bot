@@ -1,0 +1,25 @@
+{
+  "name": "bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@google-cloud/translate": "^6.3.0",
+    "@iamtraction/google-translate": "^1.1.2",
+    "discord.io": "^2.5.3",
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "protobufjs": "^6.11.2",
+    "winston": "^3.3.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "execute": "index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
