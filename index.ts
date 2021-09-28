@@ -22,11 +22,11 @@ const client = new DiscordJS.Client({
 function toEng(s : any, message : any) {
     return new Promise(resolve => {
         translate(s, { to: 'en' }).then((trasnlated_ : any) => {
-            // if able to translate to english pass it to toFine function.
-            toFine(trasnlated_.text, message);
+            // if able to translate to english pass it to DETECT function.
+            DETECT(trasnlated_.text, message);
           }).catch((err : any) => {
-            // if unable to translate to english, pass the original message to toFine function.
-            toFine(s, message);
+            // if unable to translate to english, pass the original message to DETECT function.
+            DETECT(s, message);
         });
     })
 }
@@ -47,7 +47,7 @@ function save() {
 }
 //------------------------------------------------------------------------------------------
 // "fine function"
-function toFine(s : any, message : any) {
+function DETECT(s : any, message : any) {
     // regex made it slow but it's shorter and easier to read so...
     const regex_mom = /muu*m|moo*m|maa*mm*a*|maa*dd*aa*|m00*m|moo*ther|muu*ther|m00*ther/s;
     const regex_your = /yoo*uu*r|uu*r|yee*3*r|y00*uu*r|thyy*|thoo*uu*|yuu*h/s;
@@ -131,11 +131,6 @@ client.on("messageCreate", async (message) => {
             content: line
         })
     }
-    //----------------------------------// restart the bot with new code.
-    if(message.content === "!exit") {
-        process.exit(0);
-    }
-
     //----------------------------------// dev mode increase debt
     if((message.content.includes("$1 to") || message.content.includes("1$ to")) && message.author.username != "The guardian") {
         //---> if an OP let them, if not be sassy.
@@ -160,6 +155,11 @@ client.on("messageCreate", async (message) => {
                 content: "you can't tell me what to do"
             })
         }
+    }
+
+    //----------------------------------// restart the bot with new code.
+    if(message.content === "!exit") {
+        process.exit(0);
     }
 })
 
