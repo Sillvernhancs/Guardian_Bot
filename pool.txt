@@ -1,9 +1,9 @@
-IamSilver 28 
-Osaid 9 
-sadskybison 13 
-Segmentation 1 
-restrictionzz 6 
-Javic 4 
-Stewie 4 
-_unsigned1nt 4 
-ka$h 1 
+Segmentation 1 4 
+ka$h 1 2 
+Javic 4 4 
+Stewie 4 4 
+_unsigned1nt 5 4 
+restrictionzz 6 4 
+Osaid 9 0 
+sadskybison 14 4 
+IamSilver 21 0 
