@@ -60,7 +60,7 @@ function save() {
     // save to the file pool.txt
     var line = "";
     // sort the price pool and save it to the file.
-    price_pool = new Map([...price_pool.entries()].sort((b, a) => b[1] - a[1]));
+    price_pool = new Map([...price_pool.entries()].sort((a, b) => b[1] - a[1]));
     for (var entry of price_pool.entries()) {
         line += entry[0] + " " + entry[1] + " " + pardonCount.get(entry[0]) + " \n";
     }
