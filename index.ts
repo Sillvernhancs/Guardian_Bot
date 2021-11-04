@@ -79,7 +79,7 @@ function save() {
 function DETECT(s : any, message : any) {
     // regex made it slow but it's shorter and easier to read so...
     const regex_mom = /muu*m|moo*m|maa*mm*a*|maa*dd*aa*|m00*m|moo*ther|muu*ther|m00*ther/s;
-    const regex_your = /yoo*uu*r|uu*r|yee*3*r|y00*uu*r|thyy*|thoo*uu*|yuu*h|y33*r/s;
+    const regex_your = /yoo*uu*r|uu*r|yee*3*r|y00*uu*r|thyy*|thoo*uu*|yuu*h|y33*r|yoo*|joo*e*/s;
     if(regex_mom.test(s) && regex_your.test(s)) {
         message.reply({
             content: "$1"
