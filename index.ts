@@ -133,7 +133,6 @@ client.on("ready", () => {
     lines.pop();
     // put in all the data
     lines.forEach((line : any) => {
-        console.log(line)
         var data = line.split(" ");
         // console.log(data[0], " ", data[1] , " ", data[1])
         price_pool.set(data[0], parseInt(data[1], 10));
