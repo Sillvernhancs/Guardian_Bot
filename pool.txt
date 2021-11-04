@@ -6,4 +6,4 @@ Jengis9 2 NaN
 restrictionzz 2 NaN 
 ka$h 1 NaN 
 Javic 1 NaN 
-IamSilver 1 undefined 
+IamSilver 1 NaN 
