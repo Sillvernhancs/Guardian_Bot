@@ -18,6 +18,11 @@ const client = new DiscordJS.Client({
         Intents.FLAGS.GUILD_MESSAGES
     ]
 })
+//------------//
+// random number generator
+function getRandomInt(max:any) {
+    return Math.floor(Math.random() * max);
+}
 //------------------------------------------------------------------------------------------
 // return a string of user names/debt/pardons
 function listUsers() {
@@ -179,7 +184,7 @@ client.on("messageCreate", async (message) => {
         console.log(message.author.username + " requested check")
     }
     //----------------------------------// check everyone's debt
-    if(message.content === "!checkAll") {
+    else if(message.content === "!checkAll") {
         var embed_ = new MessageEmbed()
         .setColor('#0099ff')
         .setTitle('---The Yer Mum Mux pool---')
@@ -192,7 +197,7 @@ client.on("messageCreate", async (message) => {
     }
     //----------------------------------// dev mode increase debt
     
-    if((message.content.startsWith("$1 to") || message.content.startsWith("1$ to")) && message.author.username != "The guardian") {
+    else if((message.content.startsWith("$1 to") || message.content.startsWith("1$ to")) && message.author.username != "The guardian") {
         //---> if an OP let them, if not be sassy.
         if(OP.includes(message.author.username)) {
             var user_ = message.content.substr(6);
@@ -216,9 +221,31 @@ client.on("messageCreate", async (message) => {
             })
         }
     }
-
+    //-------------------------------------// Respodning to "how, what, etc..."
+    else if(s.startsWith("!guardian")) {
+        var new_s = s.substr(10);
+        var yes = ["Yes!", "Perhaps...", "Yes", "Yeah sure"];
+        var no = ["No!", "Naw", "No", "You wish", "Be nicer and I'll think about it", "Absolutely not!", "Don't think so"];
+        var decider = getRandomInt(2);
+        var reply = "I'm not that smart yet";
+        if(new_s.startsWith("will") || new_s.startsWith("could") || new_s.startsWith("would") || new_s.startsWith("can") || new_s.startsWith("is")) {
+            switch (decider) {
+                case 1:
+                    reply = yes[getRandomInt(yes.length)]
+                    break;
+                case 0:
+                    reply = no[getRandomInt(no.length)]
+                    break;
+                default:
+                    console.log("something went wrong with the decider.")
+            }
+        }
+        message.reply({
+            content: reply
+        })
+    }
     //----------------------------------// restart the bot with new code.
-    if(message.content === "!exit") {
+    else if(message.content === "!exit") {
         process.exit(0);
     }
 })
