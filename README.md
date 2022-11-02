@@ -1,5 +1,5 @@
 # Guardian_Bot
-A bot that does many things. Your mom jokes detection, and more
+A bot that does many things. Jokes detection, and more
 Using:
 - google translate api
 - discord js
@@ -10,4 +10,4 @@ Function:
 - !checkAll: check everyone's debt
 - 1$/$1 to "user": increase a person's debt, given that you're on the op list
 
-auto detects yer mum jokes in the chat.
+auto detects jokes in the chat.
