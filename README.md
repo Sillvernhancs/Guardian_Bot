@@ -1,5 +1,5 @@
 # Guardian_Bot
-A bot that does many things. Jokes detection, and more
+A bot that does jokes detection, and more
 Using:
 - google translate api
 - discord js
